@@ -36,6 +36,13 @@ $ php zaim-cli money:get
 $ php zaim-cli money:get --month=201906
 ```
 
+Docker
+
+```sh
+$ docker build . -t zaim-cli:latest
+$ docker run -e ZAIM_AUTH_EMAIL=email@example.com -e ZAIM_AUTH_PASSWORD=p@ssword! -it --rm zaim-cli:latest money:get --month=201906
+```
+
 ## テスト
 
 ```sh
