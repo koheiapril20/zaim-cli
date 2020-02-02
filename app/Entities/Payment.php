@@ -12,6 +12,7 @@ class Payment extends Entity
      * @var array
      */
     protected $keys = [
+        'id',
         'date',
         'category',
         'price',

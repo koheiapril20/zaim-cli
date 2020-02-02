@@ -54,9 +54,9 @@ class GetMoney extends Command
             $this->getMonth(Carbon::today())
         );
 
-        $table = $this->format($payments);
+        $arr = $this->format($payments);
 
-        $this->table(...$table);
+        $this->line(json_encode($arr));
     }
 
     /**
@@ -118,33 +118,23 @@ class GetMoney extends Command
      */
     private function format(array $payments): array
     {
-        $header = [
-            '日付',
-            'カテゴリ',
-            '金額',
-            '出金',
-            '入金',
-            'お店',
-            '品目',
-            'メモ',
-        ];
-
         $body = [];
 
         foreach ($payments as $payment) {
             $body[] = [
-                $payment->date->format('Y/m/d'),
-                $payment->category,
-                '¥' . number_format($payment->price),
-                mb_strlen($payment->income) > 0 ? '*' : '',
-                mb_strlen($payment->spend) > 0 ? '*' : '',
-                $payment->place,
-                $payment->name,
-                $payment->comment,
+                'id' => $payment->id,
+                'date' => $payment->date->format('Y-m-d'),
+                'category' => $payment->category,
+                'amount' => $payment->price,
+                'income' => $payment->income,
+                'spend' => $payment->spend,
+                'place' => $payment->place,
+                'name' => $payment->name,
+                'comment' => $payment->comment,
             ];
         }
 
-        return [$header, $body];
+        return $body;
     }
 
     /**
