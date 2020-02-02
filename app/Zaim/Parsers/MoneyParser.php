@@ -41,6 +41,9 @@ class MoneyParser extends Parser
         $rows->each(function (Crawler $row, int $i) use (&$payments) {
             $payment = new Payment;
 
+            $dataUrl = explode('/', $row->children('td.date a')->attr('data-url'));
+            $payment->id = $dataUrl[2];
+
             $payment->date = $this->parseDate(
                 $row->children('td.date a')->text()
             );
