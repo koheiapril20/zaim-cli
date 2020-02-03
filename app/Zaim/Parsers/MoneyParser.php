@@ -57,11 +57,11 @@ class MoneyParser extends Parser
             );
 
             try {
-                $payment->income = $row->children('td.from_account a img')->attr('alt');
+                $payment->from = $row->children('td.from_account a img')->attr('alt');
             } catch (InvalidArgumentException $e) { }
 
             try {
-                $payment->spend = $row->children('td.to_account a img')->attr('alt');
+                $payment->to = $row->children('td.to_account a img')->attr('alt');
             } catch (InvalidArgumentException $e) { }
 
             $payment->place = $this->flat(
