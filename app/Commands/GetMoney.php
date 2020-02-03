@@ -56,7 +56,7 @@ class GetMoney extends Command
 
         $arr = $this->format($payments);
 
-        $this->line(json_encode($arr));
+        $this->line(json_encode($arr, JSON_UNESCAPED_UNICODE));
     }
 
     /**
